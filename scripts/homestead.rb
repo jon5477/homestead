@@ -343,6 +343,12 @@ class Homestead
             end
         end
 
+        if settings.has_key?("activemq") && settings["activemq"]
+            config.vm.provision "shell" do |s|
+                s.path = scriptDir + "/install-activemq.sh"
+            end
+        end
+
         # Configure All Of The Configured Databases
         if settings.has_key?("databases")
             settings["databases"].each do |db|
