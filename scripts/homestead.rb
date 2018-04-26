@@ -310,6 +310,10 @@ class Homestead
             s.inline = "sudo service nginx restart; sudo service php5.6-fpm restart; sudo service php7.0-fpm restart; sudo service php7.1-fpm restart; sudo service php7.2-fpm restart"
         end
 
+        config.vm.provision "shell" do |s|
+            s.path = scriptDir + "/install-activemq.sh"
+        end
+
         # Install MariaDB If Necessary
         if settings.has_key?("mariadb") && settings["mariadb"]
             config.vm.provision "shell" do |s|
