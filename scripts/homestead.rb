@@ -87,7 +87,8 @@ class Homestead
             4040 => 4040,
             5432 => 54320,
             8025 => 8025,
-            27017 => 27017
+            27017 => 27017,
+            61616 => 61616
         }
 
         # Use Default Port Forwarding Unless Overridden
