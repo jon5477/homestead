@@ -18,19 +18,21 @@ echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-se
 sudo apt-get -y install oracle-java8-installer
 
 # Create new ActiveMQ user for Unix Daemon
-useradd -m activemq -d /srv/activemq
+sudo useradd -m activemq -d /srv/activemq
 cd /srv/activemq
 
 # Download ActiveMQ
-sudo -i -u activemq tar zxvf apache-activemq-5.15.3-bin.tar.gz
+sudo -u -u activemq curl -O -J -L "http://www.apache.org/dyn/closer.cgi?action=download&filename=/activemq/5.15.4/apache-activemq-5.15.4-bin.tar.gz"
+# Extract ActiveMQ
+sudo -i -u activemq tar zxvf apache-activemq-5.15.4-bin.tar.gz
 # Link ActiveMQ
-sudo -i -u activemq ln -snf apache-activemq-5.15.3 current
+sudo -i -u activemq ln -snf apache-activemq-5.15.4 current
 
-chown -R activemq:users apache-activemq-5.15.3
+sudo chown -R activemq:users apache-activemq-5.15.4
 
 # Create the SystemD init script for ActiveMQ
 echo "[Unit]
-Description=ActiveMQ 5.15.3 Broker
+Description=ActiveMQ 5.15.4 Broker
 After=network.target
 After=syslog.target
 
@@ -69,10 +71,10 @@ SendSIGKILL=no
 SuccessExitStatus=143
 
 Restart=on-abort
-RestartSec=5s" | tee /lib/systemd/system/activemq.service > /dev/null
+RestartSec=5s" | sudo tee /lib/systemd/system/activemq.service > /dev/null
 
 # Enable ActiveMQ
-systemctl enable activemq
+sudo systemctl enable activemq
 
 # Start ActiveMQ service
-systemctl start activemq
+sudo systemctl start activemq
