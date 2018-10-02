@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
+export ACTIVEMQ_VERSION=5.15.6
 # Check If ActiveMQ Has Been Installed
 
 if [ -e /srv/activemq/current ]
@@ -22,17 +23,17 @@ sudo useradd -m activemq -d /srv/activemq
 cd /srv/activemq
 
 # Download ActiveMQ
-sudo -i -u activemq curl -O -J -L "http://www.apache.org/dyn/closer.cgi?action=download&filename=/activemq/5.15.4/apache-activemq-5.15.4-bin.tar.gz"
+sudo -i -u activemq curl -O -J -L "http://www.apache.org/dyn/closer.cgi?action=download&filename=/activemq/$ACTIVEMQ_VERSION/apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz"
 # Extract ActiveMQ
-sudo -i -u activemq tar zxvf apache-activemq-5.15.4-bin.tar.gz
+sudo -i -u activemq tar zxvf apache-activemq-$ACTIVEMQ_VERSION-bin.tar.gz
 # Link ActiveMQ
-sudo -i -u activemq ln -snf apache-activemq-5.15.4 current
+sudo -i -u activemq ln -snf apache-activemq-$ACTIVEMQ_VERSION current
 
-sudo chown -R activemq:users apache-activemq-5.15.4
+sudo chown -R activemq:users apache-activemq-$ACTIVEMQ_VERSION
 
 # Create the SystemD init script for ActiveMQ
 echo "[Unit]
-Description=ActiveMQ 5.15.4 Broker
+Description=ActiveMQ $ACTIVEMQ_VERSION Broker
 After=network.target
 After=syslog.target
 
