@@ -22,7 +22,7 @@ sudo useradd -m activemq -d /srv/activemq
 cd /srv/activemq
 
 # Download ActiveMQ
-sudo -u -u activemq curl -O -J -L "http://www.apache.org/dyn/closer.cgi?action=download&filename=/activemq/5.15.4/apache-activemq-5.15.4-bin.tar.gz"
+sudo -i -u activemq curl -O -J -L "http://www.apache.org/dyn/closer.cgi?action=download&filename=/activemq/5.15.4/apache-activemq-5.15.4-bin.tar.gz"
 # Extract ActiveMQ
 sudo -i -u activemq tar zxvf apache-activemq-5.15.4-bin.tar.gz
 # Link ActiveMQ
