@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
-export ACTIVEMQ_VERSION=5.15.7
+export ACTIVEMQ_VERSION=5.15.8
 # Check If ActiveMQ Has Been Installed
 
 if [ -e /srv/activemq/current ]
@@ -10,13 +10,10 @@ then
     exit 0
 fi
 
-# Install Java 8
+# Install Java 11
 
-sudo add-apt-repository -y ppa:webupd8team/java
 sudo apt-get update
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-sudo apt-get -y install oracle-java8-installer
+sudo apt-get -y install openjdk-11-jre-headless
 
 # Create new ActiveMQ user for Unix Daemon
 sudo useradd -m activemq -d /srv/activemq
