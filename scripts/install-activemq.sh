@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export DEBIAN_FRONTEND=noninteractive
-export ACTIVEMQ_VERSION=5.15.7
+export ACTIVEMQ_VERSION=5.15.8
 # Check If ActiveMQ Has Been Installed
 
 if [ -e /srv/activemq/current ]
