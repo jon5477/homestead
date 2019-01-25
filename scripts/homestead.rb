@@ -86,7 +86,9 @@ class Homestead
             3306 => 33060,
             4040 => 4040,
             5432 => 54320,
+            5672 => 5672,
             8025 => 8025,
+            15672 => 15672,
             27017 => 27017,
             61616 => 61616
         }
@@ -311,8 +313,18 @@ class Homestead
             s.inline = "sudo service nginx restart; sudo service php5.6-fpm restart; sudo service php7.0-fpm restart; sudo service php7.1-fpm restart; sudo service php7.2-fpm restart"
         end
 
-        config.vm.provision "shell" do |s|
-            s.path = scriptDir + "/install-activemq.sh"
+        # Install ActiveMQ If Necessary
+        if settings.has_key?("activemq") && settings["activemq"]
+            config.vm.provision "shell" do |s|
+                s.path = scriptDir + "/install-activemq.sh"
+            end
+        end
+
+        # Install RabbitMQ If Necessary
+        if settings.has_key?("rabbitmq") && settings["rabbitmq"]
+            config.vm.provision "shell" do |s|
+                s.path = scriptDir + "/install-rabbitmq.sh"
+            end
         end
 
         # Install MariaDB If Necessary
