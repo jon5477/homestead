@@ -1,10 +1,10 @@
 export distribution=bionic
 
-apt-key adv --keyserver "hkps.pool.sks-keyservers.net" --recv-keys "0x6B73A36E6026DFCA"
+wget -O - "https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc" | sudo apt-key add -
 
 echo "# This repository provides Erlang packages
 # See below for supported distribution and component values
-deb https://dl.bintray.com/rabbitmq-erlang/debian $distribution main
+deb https://dl.bintray.com/rabbitmq-erlang/debian $distribution erlang
 deb https://dl.bintray.com/rabbitmq/debian $distribution main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list > /dev/null
 
 sudo apt-get update
